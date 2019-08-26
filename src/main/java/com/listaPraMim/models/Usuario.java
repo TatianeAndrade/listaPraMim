@@ -30,6 +30,12 @@ public class Usuario implements Serializable{
 	@NotEmpty
 	private String senha;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -48,6 +54,4 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
 }
