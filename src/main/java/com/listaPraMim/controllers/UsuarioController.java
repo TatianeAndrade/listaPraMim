@@ -31,8 +31,8 @@ public class UsuarioController {
 		if(result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos");
 		}
-		us.criarUsuario(usuario);
-		return ResponseEntity.ok("ok");
+		Usuario user = us.criarUsuario(usuario);
+		return ResponseEntity.accepted().body(user);
 	}
 	
 	@GetMapping("/{id}")

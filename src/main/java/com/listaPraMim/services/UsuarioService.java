@@ -14,8 +14,9 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository us;
 	
-	public void criarUsuario(Usuario usuario) {
+	public Usuario criarUsuario(Usuario usuario) {
 		us.save(usuario);
+		return usuario;
 	}
 	
 	public Usuario buscarUsuario(long id) {
@@ -25,9 +26,11 @@ public class UsuarioService {
 	
 	public Usuario AtualizarUsuario(long id, Usuario usuario) {
 		 Usuario user = us.findById(id).get();
-		 usuario.setId(user.getId());
-		 us.save(usuario);
-		 return usuario;
+		 user.setEmail(usuario.getEmail());
+		 user.setNome(usuario.getNome());
+		 user.setSenha(usuario.getSenha());
+		 us.save(user);
+		 return user;
 	}
 	
 	public void removeUsuario(long id) {
