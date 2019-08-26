@@ -12,8 +12,9 @@ public class ListaService {
 	@Autowired
 	private ListaRepository lr;
 	
-	public void cadastrarLista(Lista lista) {
+	public Lista cadastrarLista(Lista lista) {
 		lr.save(lista);
+		return lista;
 	}
 	
 	public Lista buscarLista(long id) {

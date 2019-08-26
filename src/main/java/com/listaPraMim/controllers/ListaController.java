@@ -30,26 +30,26 @@ public class ListaController {
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos!");
 		}
-		ls.cadastrarLista(lista);
-		return ResponseEntity.ok(lista.getNome());
+		Lista list = ls.cadastrarLista(lista);
+		return ResponseEntity.ok(list);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> removerLista(@PathVariable("id") long id){
 		ls.removerLista(id);
-		return ResponseEntity.accepted().body("ok");
+		return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarLista(@PathVariable("id") long id){
 		Lista lista = ls.buscarLista(id);
-		return ResponseEntity.accepted().body(lista);
+		return ResponseEntity.ok().body(lista);
 	}
 	
 	@PutMapping(("/{id}"))
 	public ResponseEntity<?> atualizarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista){
 		Lista newLista = ls.atualizarLista(id, lista);
-		return ResponseEntity.accepted().body(newLista);
+		return ResponseEntity.ok().body(newLista);
 	}
 	
 }
