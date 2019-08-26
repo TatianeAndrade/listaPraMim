@@ -24,7 +24,7 @@ public class UsuarioService {
 		return usuario;
 	}
 	
-	public Usuario AtualizarUsuario(long id, Usuario usuario) {
+	public Usuario atualizarUsuario(long id, Usuario usuario) {
 		 Usuario user = us.findById(id).get();
 		 user.setEmail(usuario.getEmail());
 		 user.setNome(usuario.getNome());
