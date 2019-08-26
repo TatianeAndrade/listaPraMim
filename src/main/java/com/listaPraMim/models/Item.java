@@ -1,18 +1,17 @@
 package com.listaPraMim.models;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Lista implements Serializable{
+public class Item implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,8 +23,8 @@ public class Lista implements Serializable{
 	@NotEmpty
 	private String nome;
 	
-	@OneToMany
-	private List<Item> itens;
+	@ManyToOne
+	private Lista lista;
 
 	public String getNome() {
 		return nome;
@@ -35,15 +34,16 @@ public class Lista implements Serializable{
 		this.nome = nome;
 	}
 
-	public List<Item> getItens() {
-		return itens;
+	public Lista getLista() {
+		return lista;
 	}
 
-	public void setItens(List<Item> itens) {
-		this.itens = itens;
+	public void setLista(Lista lista) {
+		this.lista = lista;
 	}
 
 	public long getId() {
 		return id;
 	}
+	
 }
