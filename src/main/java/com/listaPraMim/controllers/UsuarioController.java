@@ -32,24 +32,24 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().body("Dados Invalidos");
 		}
 		Usuario user = us.criarUsuario(usuario);
-		return ResponseEntity.accepted().body(user);
+		return ResponseEntity.ok().body(user);
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getUsuario(@PathVariable("id") long id){
 		Usuario usuario = us.buscarUsuario(id);
-		return ResponseEntity.accepted().body(usuario);
+		return ResponseEntity.ok().body(usuario);
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<?> atualizaUsuario(@PathVariable("id") long id, @RequestBody Usuario usuario){
 		Usuario user = us.AtualizarUsuario(id, usuario);
-		return ResponseEntity.accepted().body(user);
+		return ResponseEntity.ok().body(user);
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletarUsuario(@PathVariable("id") long id){
 		us.removeUsuario(id);
-		return ResponseEntity.accepted().body("ok");
+		return ResponseEntity.ok().build();
 	}
 }
