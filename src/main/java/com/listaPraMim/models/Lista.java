@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ public class Lista implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@NotNull
@@ -26,6 +27,9 @@ public class Lista implements Serializable{
 	
 	@OneToMany
 	private List<Item> itens;
+	
+	@ManyToOne
+	private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -45,5 +49,12 @@ public class Lista implements Serializable{
 
 	public long getId() {
 		return id;
+	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 }

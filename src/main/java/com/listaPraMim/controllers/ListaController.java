@@ -1,5 +1,7 @@
 package com.listaPraMim.controllers;
 
+import java.util.HashMap;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +27,16 @@ public class ListaController {
 	@Autowired
 	private ListaService ls;
 	
-	@PostMapping({"/", ""})
-	public ResponseEntity<?> criarLista(@Valid @RequestBody Lista lista, BindingResult result){
+	@PostMapping({"/{id}"})
+	public ResponseEntity<Object> criarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista, BindingResult result){
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos!");
 		}
-		Lista list = ls.cadastrarLista(lista);
-		return ResponseEntity.ok(list);
+		Lista list = ls.cadastrarLista(lista, id);
+		HashMap<String, Object> resp = new HashMap<>();
+		resp.put("id", list.getId());
+		resp.put("nome", list.getNome());
+		return ResponseEntity.ok(resp);
 	}
 	
 	@DeleteMapping("/{id}")

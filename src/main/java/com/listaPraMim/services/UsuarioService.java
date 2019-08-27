@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.listaPraMim.models.Lista;
 import com.listaPraMim.models.Usuario;
 import com.listaPraMim.repositories.UsuarioRepository;
 
@@ -31,6 +32,13 @@ public class UsuarioService {
 		 user.setSenha(usuario.getSenha());
 		 us.save(user);
 		 return user;
+	}
+	
+	public Usuario cadastrarLista(Lista lista, long id) {
+		Usuario usuario = buscarUsuario(id);
+		usuario.addLista(lista);
+		us.save(usuario);
+		return usuario;
 	}
 	
 	public void removeUsuario(long id) {
