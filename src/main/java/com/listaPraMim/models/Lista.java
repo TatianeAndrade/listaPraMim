@@ -28,8 +28,8 @@ public class Lista implements Serializable{
 	@OneToMany
 	private List<Item> itens;
 	
-	@ManyToOne
-	private Usuario usuario;
+//	@ManyToOne
+//	private Usuario usuario;
 
 	public String getNome() {
 		return nome;
@@ -50,11 +50,11 @@ public class Lista implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+//	public Usuario getUsuario() {
+//		return usuario;
+//	}
+//	
+//	public void setUsuario(Usuario usuario) {
+//		this.usuario = usuario;
+//	}
 }

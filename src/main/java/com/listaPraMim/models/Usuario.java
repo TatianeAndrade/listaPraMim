@@ -66,4 +66,7 @@ public class Usuario implements Serializable{
 	public boolean addLista(Lista lista) {
 		return listas.add(lista);
 	}
+	public boolean removeLista(Lista lista) {
+		return listas.remove(lista);
+	}
 }

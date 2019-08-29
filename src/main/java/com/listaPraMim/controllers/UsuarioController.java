@@ -3,6 +3,7 @@ package com.listaPraMim.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,8 @@ public class UsuarioController {
 			return ResponseEntity.badRequest().body("Dados Invalidos");
 		}
 		Usuario user = us.criarUsuario(usuario);
-		return ResponseEntity.ok().body(user);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		return new ResponseEntity<>(user, responseHeaders, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")

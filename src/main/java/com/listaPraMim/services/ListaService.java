@@ -17,9 +17,8 @@ public class ListaService {
 	private UsuarioService us;
 	
 	public Lista cadastrarLista(Lista lista, long id) {
-		lr.save(lista);
-		Usuario usuario = us.cadastrarLista(lista, id);
-		lista.setUsuario(usuario);
+		Usuario usuario = us.buscarUsuario(id);
+		usuario.addLista(lista);
 		lr.save(lista);
 		return lista;
 	}
@@ -29,8 +28,10 @@ public class ListaService {
 		return lista;
 	}
 	
-	public void removerLista(long id) {
+	public void removerLista(long id, long idus) {
 		Lista lista = lr.findById(id).get();
+		Usuario usuario = us.buscarUsuario(idus);
+		usuario.removeLista(lista);
 		lr.delete(lista);
 	}
 	

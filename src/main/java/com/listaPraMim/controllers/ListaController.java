@@ -5,6 +5,8 @@ import java.util.HashMap;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,19 +38,24 @@ public class ListaController {
 		HashMap<String, Object> resp = new HashMap<>();
 		resp.put("id", list.getId());
 		resp.put("nome", list.getNome());
-		return ResponseEntity.ok(resp);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		return new ResponseEntity<>(resp, responseHeaders, HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> removerLista(@PathVariable("id") long id){
-		ls.removerLista(id);
+	@DeleteMapping("/{id}&{idus}")
+	public ResponseEntity<?> removerLista(@PathVariable("id") long id, @PathVariable("idus") long idus){
+		ls.removerLista(id, idus);
 		return ResponseEntity.ok().build();
 	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<?> buscarLista(@PathVariable("id") long id){
 		Lista lista = ls.buscarLista(id);
-		return ResponseEntity.ok().body(lista);
+		HashMap<String, Object> resp = new HashMap<>();
+		resp.put("id", lista.getId());
+		resp.put("nome", lista.getNome());
+		resp.put("itens", lista.getItens());
+		return ResponseEntity.ok().body(resp);
 	}
 	
 	@PutMapping(("/{id}"))
