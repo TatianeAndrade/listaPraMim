@@ -3,8 +3,11 @@ package com.listaPraMim.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.listaPraMim.models.Item;
+import com.listaPraMim.models.ItemDaLista;
 import com.listaPraMim.models.Lista;
 import com.listaPraMim.models.Usuario;
+import com.listaPraMim.repositories.ItemDaListaRepository;
 import com.listaPraMim.repositories.ListaRepository;
 
 @Service
@@ -16,11 +19,27 @@ public class ListaService {
 	@Autowired
 	private UsuarioService us;
 	
+	@Autowired
+	private ItemService is;
+	
+	@Autowired
+	private ItemDaListaRepository ilr;
+	
 	public Lista cadastrarLista(Lista lista, long id) {
 		Usuario usuario = us.buscarUsuario(id);
 		usuario.addLista(lista);
 		lr.save(lista);
 		return lista;
+	}
+	
+	public void cadastrarItem(String nome, int qtd, long id) {
+		Item item = is.criarItem(nome);
+		ItemDaLista itemLista = new ItemDaLista();
+		itemLista.setQuantidade(qtd);
+		Lista lista = lr.findById(id).get();
+		itemLista.setItem(item);
+		itemLista.setLista(lista);
+		ilr.save(itemLista);
 	}
 	
 	public Lista buscarLista(long id) {

@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.listaPraMim.models.Item;
 import com.listaPraMim.models.Lista;
+import com.listaPraMim.services.ItemService;
 import com.listaPraMim.services.ListaService;
 import com.listaPraMim.utils.RestConstants;
 
@@ -28,6 +30,9 @@ public class ListaController {
 	
 	@Autowired
 	private ListaService ls;
+	
+	@Autowired
+	private ItemService is;
 	
 	@PostMapping({"/{id}"})
 	public ResponseEntity<Object> criarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista, BindingResult result){
@@ -40,6 +45,15 @@ public class ListaController {
 		resp.put("nome", list.getNome());
 		HttpHeaders responseHeaders = new HttpHeaders();
 		return new ResponseEntity<>(resp, responseHeaders, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/item/{id}")
+	public ResponseEntity<?> criarItem(@PathVariable("id") long id, @RequestBody HashMap<String, Object> req, BindingResult result){
+		if (result.hasErrors()) {
+			return ResponseEntity.badRequest().body("Dados Invalidos!");
+		}
+		ls.cadastrarItem((String) req.get("nome"), (int) req.get("qtd"), id);
+		return ResponseEntity.ok(req.get("qtd"));
 	}
 	
 	@DeleteMapping("/{id}&{idus}")

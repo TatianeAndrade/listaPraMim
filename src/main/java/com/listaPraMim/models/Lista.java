@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,10 +25,11 @@ public class Lista implements Serializable{
 	private String nome;
 	
 	@OneToMany
-	private List<Item> itens;
+	private List<ItemDaLista> itens;
 	
-//	@ManyToOne
-//	private Usuario usuario;
+	public void cadastrarItem(ItemDaLista item) {
+		itens.add(item);
+	}
 
 	public String getNome() {
 		return nome;
@@ -39,22 +39,15 @@ public class Lista implements Serializable{
 		this.nome = nome;
 	}
 
-	public List<Item> getItens() {
+	public List<ItemDaLista> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<Item> itens) {
+	public void setItens(List<ItemDaLista> itens) {
 		this.itens = itens;
 	}
 
 	public long getId() {
 		return id;
 	}
-//	public Usuario getUsuario() {
-//		return usuario;
-//	}
-//	
-//	public void setUsuario(Usuario usuario) {
-//		this.usuario = usuario;
-//	}
 }
