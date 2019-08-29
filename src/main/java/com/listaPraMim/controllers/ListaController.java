@@ -1,6 +1,8 @@
 package com.listaPraMim.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.listaPraMim.models.Item;
+import com.listaPraMim.models.ItemDaLista;
 import com.listaPraMim.models.Lista;
 import com.listaPraMim.services.ItemService;
 import com.listaPraMim.services.ListaService;
@@ -66,9 +69,14 @@ public class ListaController {
 	public ResponseEntity<?> buscarLista(@PathVariable("id") long id){
 		Lista lista = ls.buscarLista(id);
 		HashMap<String, Object> resp = new HashMap<>();
+		List<ItemDaLista> itensDaLista = lista.getItens();
+		List<Item> itens = new ArrayList<>();
+		for (ItemDaLista itemDaLista : itensDaLista) {
+			itens.add(itemDaLista.getItem());
+		}
 		resp.put("id", lista.getId());
 		resp.put("nome", lista.getNome());
-		resp.put("itens", lista.getItens());
+		resp.put("itens", itens);
 		return ResponseEntity.ok().body(resp);
 	}
 	
@@ -76,6 +84,12 @@ public class ListaController {
 	public ResponseEntity<?> atualizarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista){
 		Lista newLista = ls.atualizarLista(id, lista);
 		return ResponseEntity.ok().body(newLista);
+	}
+	
+	@GetMapping("/auto/{id}")
+	public ResponseEntity<?> gerarListaAutomatica(@PathVariable("id") long id){
+		Lista lista = ls.gerarListaAutomatica(id);
+		return ResponseEntity.ok(lista);
 	}
 	
 }

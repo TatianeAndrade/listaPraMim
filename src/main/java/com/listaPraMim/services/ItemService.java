@@ -18,9 +18,18 @@ public class ItemService {
 	}
 	
 	public Item criarItem(String nome) {
-		Item item = new Item();
-		item.setNome(nome);
-		ir.save(item);
+		Item item = ir.findByNome(nome);
+		
+		if( item == null) {
+			item = new Item();
+			item.setNome(nome);
+			ir.save(item);
+		}
+		
 		return item;
+	}
+	
+	public Item getItem(long id) {
+		return ir.findById(id).get();
 	}
 }
