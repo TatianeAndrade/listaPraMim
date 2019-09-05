@@ -1,6 +1,7 @@
 package com.listaPraMim.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Lista implements Serializable{
 	private String nome;
 	
 	@OneToMany
-	private List<ItemDaLista> itens;
+	private List<ItemDaLista> itens = new ArrayList<>();
 	
 	public void cadastrarItem(ItemDaLista item) {
 		itens.add(item);

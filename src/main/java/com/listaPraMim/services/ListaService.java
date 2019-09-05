@@ -73,7 +73,6 @@ public class ListaService {
 		newLista.setNome("Lista Automatica");
 		newLista = this.cadastrarLista(newLista, id);
 		for (Long elemento : lista) {
-			newLista.setNome("list");
 			Item item = is.getItem(elemento);
 			this.cadastrarItem(item.getNome(), 1, newLista.getId());
 		}

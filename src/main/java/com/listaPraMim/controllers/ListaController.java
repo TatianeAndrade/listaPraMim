@@ -89,7 +89,17 @@ public class ListaController {
 	@GetMapping("/auto/{id}")
 	public ResponseEntity<?> gerarListaAutomatica(@PathVariable("id") long id){
 		Lista lista = ls.gerarListaAutomatica(id);
-		return ResponseEntity.ok(lista);
+		HashMap<String, Object> resp = new HashMap<>();
+		List<ItemDaLista> itensDaLista = lista.getItens();
+		List<Item> itens = new ArrayList<>();
+		for (ItemDaLista itemDaLista : itensDaLista) {
+			itens.add(itemDaLista.getItem());
+		}
+		resp.put("id", lista.getId());
+		resp.put("nome", lista.getNome());
+		resp.put("itens", itens);
+		return ResponseEntity.ok().body(resp);
+		
 	}
 	
 }
