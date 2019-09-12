@@ -24,7 +24,7 @@ import com.listaPraMim.enums.Perfil;
 public class Usuario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -48,6 +48,20 @@ public class Usuario implements Serializable{
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="PERFIS")
 	private Set<Integer> perfis = new HashSet<>();
+	
+	public Usuario() {
+		addPerfil(Perfil.USUARIO);
+	}
+	
+	public Usuario(long id,  String nome, String email, String senha, List<Lista> listas) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.listas = listas;
+		addPerfil(Perfil.USUARIO);
+	}
 	
 	public long getId() {
 		return id;
