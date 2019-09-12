@@ -1,8 +1,7 @@
 package com.listaPraMim.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.listaPraMim.models.Lista;
@@ -15,9 +14,17 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository us;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	public Usuario criarUsuario(Usuario usuario) {
-		us.save(usuario);
-		return usuario;
+		Usuario newUsuario = new Usuario();
+		newUsuario.setEmail(usuario.getEmail());
+		newUsuario.setListas(usuario.getListas());
+		newUsuario.setNome(usuario.getNome());
+		newUsuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+		us.save(newUsuario);
+		return newUsuario;
 	}
 	
 	public Usuario buscarUsuario(long id) {
