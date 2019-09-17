@@ -30,7 +30,7 @@ public class UsuarioService {
 		return newUsuario;
 	}
 	
-	public Usuario buscarUsuario(long id) {
+	public Usuario buscarUsuario(Long id) {
 		UsuarioSpringSecurity usuario = UserService.authenticated();
 		if(usuario == null || !usuario.hasRole(Perfil.ADMIN) && !id.equals(usuario.getId())) {
 			throw new AuthorizationException("Acesso negado");
