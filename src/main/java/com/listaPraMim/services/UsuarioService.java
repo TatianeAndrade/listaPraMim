@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.listaPraMim.enums.Perfil;
+import com.listaPraMim.exceptions.AuthorizationException;
 import com.listaPraMim.models.Lista;
 import com.listaPraMim.models.Usuario;
 import com.listaPraMim.repositories.UsuarioRepository;
+import com.listaPraMim.security.UsuarioSpringSecurity;
 
 @Service
 public class UsuarioService {
@@ -28,8 +31,12 @@ public class UsuarioService {
 	}
 	
 	public Usuario buscarUsuario(long id) {
-		Usuario usuario = us.findById(id).get();
-		return usuario;
+		UsuarioSpringSecurity usuario = UserService.authenticated();
+		if(usuario == null || !usuario.hasRole(Perfil.ADMIN) && !id.equals(usuario.getId())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		Usuario user = us.findById(id).get();
+		return user;
 	}
 	
 	public Usuario atualizarUsuario(long id, Usuario usuario) {
