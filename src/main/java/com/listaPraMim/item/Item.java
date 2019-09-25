@@ -1,4 +1,4 @@
-package com.listaPraMim.models;
+package com.listaPraMim.item;
 
 import java.io.Serializable;
 

@@ -1,10 +1,7 @@
-package com.listaPraMim.services;
+package com.listaPraMim.item;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.listaPraMim.models.Item;
-import com.listaPraMim.repositories.ItemRepository;
 
 @Service
 public class ItemService {

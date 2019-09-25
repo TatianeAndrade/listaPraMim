@@ -1,4 +1,4 @@
-package com.listaPraMim.controllers;
+package com.listaPraMim.usuario;
 
 import javax.validation.Valid;
 
@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.listaPraMim.models.Usuario;
-import com.listaPraMim.repositories.UsuarioRepository;
-import com.listaPraMim.services.UsuarioService;
+
 import com.listaPraMim.utils.RestConstants;
 
 @RestController

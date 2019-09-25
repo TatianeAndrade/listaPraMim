@@ -1,8 +1,6 @@
-package com.listaPraMim.repositories;
+package com.listaPraMim.item;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.listaPraMim.models.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Long>{
 	

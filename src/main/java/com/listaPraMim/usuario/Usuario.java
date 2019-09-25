@@ -1,4 +1,4 @@
-package com.listaPraMim.models;
+package com.listaPraMim.usuario;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,6 +19,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.listaPraMim.enums.Perfil;
+import com.listaPraMim.lista.Lista;
 
 @Entity
 public class Usuario implements Serializable{

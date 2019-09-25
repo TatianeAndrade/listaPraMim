@@ -1,4 +1,4 @@
-package com.listaPraMim.models;
+package com.listaPraMim.item;
 
 import java.io.Serializable;
 
@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import com.listaPraMim.lista.Lista;
 
 @Entity
 public class ItemDaLista implements Serializable{

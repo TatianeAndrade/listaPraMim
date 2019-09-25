@@ -1,16 +1,16 @@
-package com.listaPraMim.services;
+package com.listaPraMim.lista;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.listaPraMim.models.Item;
-import com.listaPraMim.models.ItemDaLista;
-import com.listaPraMim.models.Lista;
-import com.listaPraMim.models.Usuario;
-import com.listaPraMim.repositories.ItemDaListaRepository;
-import com.listaPraMim.repositories.ListaRepository;
+import com.listaPraMim.item.Item;
+import com.listaPraMim.item.ItemDaLista;
+import com.listaPraMim.item.ItemDaListaRepository;
+import com.listaPraMim.item.ItemService;
+import com.listaPraMim.usuario.Usuario;
+import com.listaPraMim.usuario.UsuarioService;
 
 @Service
 public class ListaService {

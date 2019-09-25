@@ -1,4 +1,4 @@
-package com.listaPraMim.models;
+package com.listaPraMim.lista;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.listaPraMim.item.ItemDaLista;
 
 @Entity
 public class Lista implements Serializable{

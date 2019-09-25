@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.listaPraMim.models.Usuario;
-import com.listaPraMim.repositories.UsuarioRepository;
 import com.listaPraMim.security.UsuarioSpringSecurity;
+import com.listaPraMim.usuario.Usuario;
+import com.listaPraMim.usuario.UsuarioRepository;
 
 @Service
 public class UsuarioDetailsServiceImpl implements UserDetailsService{

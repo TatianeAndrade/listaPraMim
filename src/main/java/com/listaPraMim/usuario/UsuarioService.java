@@ -1,4 +1,4 @@
-package com.listaPraMim.services;
+package com.listaPraMim.usuario;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -6,10 +6,9 @@ import org.springframework.stereotype.Service;
 
 import com.listaPraMim.enums.Perfil;
 import com.listaPraMim.exceptions.AuthorizationException;
-import com.listaPraMim.models.Lista;
-import com.listaPraMim.models.Usuario;
-import com.listaPraMim.repositories.UsuarioRepository;
+import com.listaPraMim.lista.Lista;
 import com.listaPraMim.security.UsuarioSpringSecurity;
+import com.listaPraMim.services.UserService;
 
 @Service
 public class UsuarioService {

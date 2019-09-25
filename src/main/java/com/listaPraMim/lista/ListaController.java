@@ -1,4 +1,4 @@
-package com.listaPraMim.controllers;
+package com.listaPraMim.lista;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,11 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.listaPraMim.models.Item;
-import com.listaPraMim.models.ItemDaLista;
-import com.listaPraMim.models.Lista;
-import com.listaPraMim.services.ItemService;
-import com.listaPraMim.services.ListaService;
+import com.listaPraMim.item.Item;
+import com.listaPraMim.item.ItemDaLista;
+import com.listaPraMim.item.ItemService;
 import com.listaPraMim.utils.RestConstants;
 
 @RestController
