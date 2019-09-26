@@ -18,4 +18,18 @@ O Lista pra mim©, é um app que vai revolucionar a forma como você faz compras
   <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/endpoints.png"  width="650"> 
 </p>
 
+### Arquitetura
 
+A arquitetura do servidor foi desenvolvida utilizando linguagem Java juntamente com o framework Spring Boot. O modelo de designer adotado foi o MVC. Foi utilizado o SGBD relacional PostgreSQL. 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/arquitetura.png"  width="650"> 
+</p>
+
+### Autenticação
+
+A entidade Usuario foi utilizada para conter os atributos de autenticação email(username) e senha(password). O JWT(JSON Web Token) foi escolhido como o mecanismo de segurança para identificação do usuário. O usuário na fase de autenticação envia email e senha e caso sejam válidos o JWT gera um Token com uma determinada validade que será utilizado em suas requisições.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/autenticacao.png"  width="650"> 
+</p>
