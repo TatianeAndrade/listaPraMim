@@ -35,14 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private JWTUtil jwtUtil;
 	
 	@Autowired
-    private Environment env;
+    private Environment environment;
 	
 	private static final String h2 = "/h2-console/**";
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		if (Arrays.asList(env.getActiveProfiles()).contains("test")) {
+		if (Arrays.asList(environment.getActiveProfiles()).contains("test")) {
             http.headers().frameOptions().disable();
         }
 		http.cors().and().csrf().disable();

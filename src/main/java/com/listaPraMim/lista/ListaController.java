@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.listaPraMim.item.Item;
 import com.listaPraMim.item.ItemDaLista;
-import com.listaPraMim.item.ItemService;
 import com.listaPraMim.utils.RestConstants;
 
 @RestController
@@ -31,17 +29,14 @@ import com.listaPraMim.utils.RestConstants;
 public class ListaController {
 	
 	@Autowired
-	private ListaService ls;
-	
-	@Autowired
-	private ItemService is;
+	private ListaService listaService;
 	
 	@PostMapping({"/{id}"})
-	public ResponseEntity<Object> criarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista, BindingResult result){
+	public ResponseEntity<Object> criarLista(@PathVariable("id") long idUsuario, @Valid @RequestBody Lista lista, BindingResult result){
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos!");
 		}
-		Lista list = ls.cadastrarLista(lista, id);
+		Lista list = listaService.cadastrarLista(lista, idUsuario);
 		HashMap<String, Object> resp = new HashMap<>();
 		resp.put("id", list.getId());
 		resp.put("nome", list.getNome());
@@ -50,24 +45,24 @@ public class ListaController {
 	}
 	
 	@PostMapping("/item/{id}")
-	public ResponseEntity<?> criarItem(@PathVariable("id") long id, @RequestBody HashMap<String, Object> req, BindingResult result){
+	public ResponseEntity<?> criarItem(@PathVariable("id") long idLista, @RequestBody HashMap<String, Object> req, BindingResult result){
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos!");
 		}
-		ls.cadastrarItem((String) req.get("nome"), (int) req.get("qtd"), id);
+		listaService.cadastrarItem((String) req.get("nome"), (int) req.get("qtd"), idLista);
 		return ResponseEntity.ok(req.get("qtd"));
 	}
 	
 	@DeleteMapping("/{id}&{idus}")
-	public ResponseEntity<?> removerLista(@PathVariable("id") long id, @PathVariable("idus") long idus){
-		ls.removerLista(id, idus);
+	public ResponseEntity<?> removerLista(@PathVariable("id") long idLista, @PathVariable("idus") long idUsuario){
+		listaService.removerLista(idLista, idUsuario);
 		return ResponseEntity.ok().build();
 	}
 	
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> buscarLista(@PathVariable("id") long id){
-		Lista lista = ls.buscarLista(id);
+	public ResponseEntity<?> buscarLista(@PathVariable("id") long idLista){
+		Lista lista = listaService.buscarLista(idLista);
 		HashMap<String, Object> resp = new HashMap<>();
 		List<ItemDaLista> itensDaLista = lista.getItens();
 		List<Item> itens = new ArrayList<>();
@@ -81,14 +76,14 @@ public class ListaController {
 	}
 	
 	@PutMapping(("/{id}"))
-	public ResponseEntity<?> atualizarLista(@PathVariable("id") long id, @Valid @RequestBody Lista lista){
-		Lista newLista = ls.atualizarLista(id, lista);
+	public ResponseEntity<?> atualizarLista(@PathVariable("id") long idLista, @Valid @RequestBody Lista lista){
+		Lista newLista = listaService.atualizarLista(idLista, lista);
 		return ResponseEntity.ok().body(newLista);
 	}
 	
 	@GetMapping("/auto/{id}")
-	public ResponseEntity<?> gerarListaAutomatica(@PathVariable("id") long id){
-		Lista lista = ls.gerarListaAutomatica(id);
+	public ResponseEntity<?> gerarListaAutomatica(@PathVariable("id") long idUsuario){
+		Lista lista = listaService.gerarListaAutomatica(idUsuario);
 		HashMap<String, Object> resp = new HashMap<>();
 		List<ItemDaLista> itensDaLista = lista.getItens();
 		List<Item> itens = new ArrayList<>();

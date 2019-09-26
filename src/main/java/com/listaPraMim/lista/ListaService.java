@@ -16,64 +16,64 @@ import com.listaPraMim.usuario.UsuarioService;
 public class ListaService {
 
 	@Autowired
-	private ListaRepository lr;
+	private ListaRepository listaRepository;
 	
 	@Autowired
-	private UsuarioService us;
+	private UsuarioService usuarioService;
 	
 	@Autowired
-	private ItemService is;
+	private ItemService itemService;
 	
 	@Autowired
-	private ItemDaListaRepository ilr;
+	private ItemDaListaRepository itemDaListaRepository;
 	
-	public Lista cadastrarLista(Lista lista, long id) {
-		Usuario usuario = us.buscarUsuario(id);
+	public Lista cadastrarLista(Lista lista, long idUsuario) {
+		Usuario usuario = usuarioService.buscarUsuario(idUsuario);
 		usuario.addLista(lista);
-		lr.save(lista);
+		listaRepository.save(lista);
 		return lista;
 	}
 	
-	public void cadastrarItem(String nome, int qtd, long id) {
-		Item item = is.criarItem(nome);
+	public void cadastrarItem(String nome, int qtd, long idLista) {
+		Item item = itemService.criarItem(nome);
 		ItemDaLista itemLista = new ItemDaLista();
 		itemLista.setQuantidade(qtd);
-		Lista lista = lr.findById(id).get();
+		Lista lista = listaRepository.findById(idLista).get();
 		itemLista.setItem(item);
 		itemLista.setLista(lista);
 		lista.cadastrarItem(itemLista);
-		ilr.save(itemLista);
-		lr.save(lista);
+		itemDaListaRepository.save(itemLista);
+		listaRepository.save(lista);
 	}
 	
-	public Lista buscarLista(long id) {
-		Lista lista = lr.findById(id).get();
+	public Lista buscarLista(long idLista) {
+		Lista lista = listaRepository.findById(idLista).get();
 		return lista;
 	}
 	
-	public void removerLista(long id, long idus) {
-		Lista lista = lr.findById(id).get();
-		Usuario usuario = us.buscarUsuario(idus);
+	public void removerLista(long idLista, long idUsuario) {
+		Lista lista = listaRepository.findById(idLista).get();
+		Usuario usuario = usuarioService.buscarUsuario(idUsuario);
 		usuario.removeLista(lista);
-		lr.delete(lista);
+		listaRepository.delete(lista);
 	}
 	
-	public Lista atualizarLista(long id, Lista newLista) {
-		Lista lista = lr.findById(id).get();
+	public Lista atualizarLista(long idLista, Lista newLista) {
+		Lista lista = listaRepository.findById(idLista).get();
 		lista.setNome(newLista.getNome());
 		lista.setItens(newLista.getItens());
-		lr.save(lista);
+		listaRepository.save(lista);
 		return lista;
 	}
 	
-	public Lista gerarListaAutomatica(long id) {
-		int qtd = (int) Math.floor(lr.count() / 2);
-		List<Long> lista = lr.itensFrequentes(id, qtd);
+	public Lista gerarListaAutomatica(long idUsuario) {
+		int qtd = (int) Math.floor(listaRepository.count() / 2);
+		List<Long> lista = listaRepository.itensFrequentes(idUsuario, qtd);
 		Lista newLista = new Lista();
 		newLista.setNome("Lista Automatica");
-		newLista = this.cadastrarLista(newLista, id);
+		newLista = this.cadastrarLista(newLista, idUsuario);
 		for (Long elemento : lista) {
-			Item item = is.getItem(elemento);
+			Item item = itemService.getItem(elemento);
 			this.cadastrarItem(item.getNome(), 1, newLista.getId());
 		}
 		return newLista;

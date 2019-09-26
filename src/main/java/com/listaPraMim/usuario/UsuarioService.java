@@ -14,7 +14,7 @@ import com.listaPraMim.services.UserService;
 public class UsuarioService {
 	
 	@Autowired
-	private UsuarioRepository us;
+	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -25,37 +25,37 @@ public class UsuarioService {
 		newUsuario.setListas(usuario.getListas());
 		newUsuario.setNome(usuario.getNome());
 		newUsuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		us.save(newUsuario);
+		usuarioRepository.save(newUsuario);
 		return newUsuario;
 	}
 	
-	public Usuario buscarUsuario(Long id) {
+	public Usuario buscarUsuario(Long idUsuario) {
 		UsuarioSpringSecurity usuario = UserService.authenticated();
-		if(usuario == null || !usuario.hasRole(Perfil.ADMIN) && !id.equals(usuario.getId())) {
+		if(usuario == null || !usuario.hasRole(Perfil.ADMIN) && !idUsuario.equals(usuario.getId())) {
 			throw new AuthorizationException("Acesso negado");
 		}
-		Usuario user = us.findById(id).get();
+		Usuario user = usuarioRepository.findById(idUsuario).get();
 		return user;
 	}
 	
-	public Usuario atualizarUsuario(long id, Usuario usuario) {
-		 Usuario user = us.findById(id).get();
+	public Usuario atualizarUsuario(long idUsuario, Usuario usuario) {
+		 Usuario user = usuarioRepository.findById(idUsuario).get();
 		 user.setEmail(usuario.getEmail());
 		 user.setNome(usuario.getNome());
 		 user.setSenha(usuario.getSenha());
-		 us.save(user);
+		 usuarioRepository.save(user);
 		 return user;
 	}
 	
-	public Usuario cadastrarLista(Lista lista, long id) {
-		Usuario usuario = buscarUsuario(id);
+	public Usuario cadastrarLista(Lista lista, long idUsuario) {
+		Usuario usuario = buscarUsuario(idUsuario);
 		usuario.addLista(lista);
-		us.save(usuario);
+		usuarioRepository.save(usuario);
 		return usuario;
 	}
 	
-	public void removeUsuario(long id) {
-		Usuario usuario = us.findById(id).get();
-		us.delete(usuario);
+	public void removeUsuario(long idUsuario) {
+		Usuario usuario = usuarioRepository.findById(idUsuario).get();
+		usuarioRepository.delete(usuario);
 	}
 }

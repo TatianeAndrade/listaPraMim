@@ -7,26 +7,26 @@ import org.springframework.stereotype.Service;
 public class ItemService {
 	
 	@Autowired
-	private ItemRepository ir;
+	private ItemRepository itemRepository;
 	
 	public Item criarItem(Item item) {
-		ir.save(item);
+		itemRepository.save(item);
 		return item;
 	}
 	
 	public Item criarItem(String nome) {
-		Item item = ir.findByNome(nome);
+		Item item = itemRepository.findByNome(nome);
 		
 		if( item == null) {
 			item = new Item();
 			item.setNome(nome);
-			ir.save(item);
+			itemRepository.save(item);
 		}
 		
 		return item;
 	}
 	
 	public Item getItem(long id) {
-		return ir.findById(id).get();
+		return itemRepository.findById(id).get();
 	}
 }

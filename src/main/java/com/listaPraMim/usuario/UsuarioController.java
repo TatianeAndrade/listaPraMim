@@ -24,34 +24,34 @@ import com.listaPraMim.utils.RestConstants;
 public class UsuarioController {
 	
 	@Autowired
-	private UsuarioService us;
+	private UsuarioService usuarioService;
 	
 	@PostMapping({"/", ""})
 	public ResponseEntity<?> cadastrarUsuario(@Valid @RequestBody Usuario usuario, BindingResult result) {
 		if(result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Dados Invalidos");
 		}
-		Usuario user = us.criarUsuario(usuario);
+		Usuario user = usuarioService.criarUsuario(usuario);
 		HttpHeaders responseHeaders = new HttpHeaders();
 		return new ResponseEntity<>(user, responseHeaders, HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getUsuario(@PathVariable("id") long id){
-		Usuario usuario = us.buscarUsuario(id);
+	public ResponseEntity<?> getUsuario(@PathVariable("id") long idUsuario){
+		Usuario usuario = usuarioService.buscarUsuario(idUsuario);
 		return ResponseEntity.ok().body(usuario);
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> atualizaUsuario(@PathVariable("id") long id, @RequestBody Usuario usuario){
-		Usuario user = us.atualizarUsuario(id, usuario);
+	public ResponseEntity<?> atualizaUsuario(@PathVariable("id") long idUsuario, @RequestBody Usuario usuario){
+		Usuario user = usuarioService.atualizarUsuario(idUsuario, usuario);
 		return ResponseEntity.ok().body(user);
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletarUsuario(@PathVariable("id") long id){
-		us.removeUsuario(id);
+	public ResponseEntity<?> deletarUsuario(@PathVariable("id") long idUsuario){
+		usuarioService.removeUsuario(idUsuario);
 		return ResponseEntity.ok().build();
 	}
 }
