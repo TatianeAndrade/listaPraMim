@@ -1,6 +1,6 @@
 # Lista pra mim
 
-<p align="right">
+<p align="center">
   <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/lista.png" width="150"> 
 </p>
 
@@ -15,7 +15,7 @@ O Lista pra mim©, é um app que vai revolucionar a forma como você faz compras
 ### Endpoints
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/endpoints.png"  width="500"> 
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/endpoints.png"  width="650"> 
 </p>
 
 
