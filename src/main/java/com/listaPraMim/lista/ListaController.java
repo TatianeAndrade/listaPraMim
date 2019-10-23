@@ -97,4 +97,11 @@ public class ListaController {
 		
 	}
 	
+	@GetMapping("/u/{id}")
+	public ResponseEntity<?> getListasUsuario(@PathVariable("id") Long idUsuario) throws InterruptedException{
+		List<Lista> result = listaService.buscarListas(idUsuario);
+		return ResponseEntity.ok().body(result);
+		
+	}
+	
 }

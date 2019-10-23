@@ -43,7 +43,7 @@ public class Usuario implements Serializable{
 	@NotEmpty
 	private String senha;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Lista> listas;
 	
 	@ElementCollection(fetch=FetchType.EAGER)
@@ -52,6 +52,7 @@ public class Usuario implements Serializable{
 	
 	public Usuario() {
 		addPerfil(Perfil.USUARIO);
+		addPerfil(Perfil.ADMIN);
 	}
 	
 	public Usuario(long id,  String nome, String email, String senha, List<Lista> listas) {
@@ -62,6 +63,7 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 		this.listas = listas;
 		addPerfil(Perfil.USUARIO);
+		addPerfil(Perfil.ADMIN);
 	}
 	
 	public long getId() {

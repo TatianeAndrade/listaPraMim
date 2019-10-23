@@ -1,6 +1,9 @@
 package com.listaPraMim.usuario;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +39,16 @@ public class UsuarioService {
 		}
 		Usuario user = usuarioRepository.findById(idUsuario).get();
 		return user;
+	}
+	
+	@Cacheable(cacheNames = "Usuarios")
+	public List<Usuario> buscarTodosUsuario(){
+		return usuarioRepository.findAll();
+	}
+	
+	
+	public List<Usuario> buscarTodosUsuarioSemCache(){
+		return usuarioRepository.findAll();
 	}
 	
 	public Usuario atualizarUsuario(long idUsuario, Usuario usuario) {

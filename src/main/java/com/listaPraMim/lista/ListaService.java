@@ -3,6 +3,7 @@ package com.listaPraMim.lista;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.listaPraMim.item.Item;
@@ -49,6 +50,13 @@ public class ListaService {
 	public Lista buscarLista(long idLista) {
 		Lista lista = listaRepository.findById(idLista).get();
 		return lista;
+	}
+	
+	@Cacheable(cacheNames = "Lista", key="#idUsuario")
+	public List<Lista> buscarListas(Long idUsuario) throws InterruptedException{
+		List<Lista> result = listaRepository.TodasListaUsuario(idUsuario);
+		Thread.sleep(500);
+		return result;
 	}
 	
 	public void removerLista(long idLista, long idUsuario) {
