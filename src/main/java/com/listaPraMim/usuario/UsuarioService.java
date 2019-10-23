@@ -42,12 +42,14 @@ public class UsuarioService {
 	}
 	
 	@Cacheable(cacheNames = "Usuarios")
-	public List<Usuario> buscarTodosUsuario(){
+	public List<Usuario> buscarTodosUsuario() throws InterruptedException{
+		Thread.sleep(500);
 		return usuarioRepository.findAll();
 	}
 	
 	
-	public List<Usuario> buscarTodosUsuarioSemCache(){
+	public List<Usuario> buscarTodosUsuarioSemCache() throws InterruptedException{
+		Thread.sleep(500);
 		return usuarioRepository.findAll();
 	}
 	

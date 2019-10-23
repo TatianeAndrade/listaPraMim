@@ -61,14 +61,14 @@ public class UsuarioController {
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/")
-	public ResponseEntity<List<Usuario>> buscarTodosUsuarios(){
+	public ResponseEntity<List<Usuario>> buscarTodosUsuarios() throws InterruptedException{
 		List<Usuario> usuarios = usuarioService.buscarTodosUsuario();
 		return ResponseEntity.ok(usuarios);
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@GetMapping("/s")
-	public ResponseEntity<List<Usuario>> buscarTodosUsuariosSemCache(){
+	public ResponseEntity<List<Usuario>> buscarTodosUsuariosSemCache() throws InterruptedException{
 		List<Usuario> usuarios = usuarioService.buscarTodosUsuarioSemCache();
 		return ResponseEntity.ok(usuarios);
 	}
