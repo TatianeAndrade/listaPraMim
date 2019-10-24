@@ -60,5 +60,9 @@ Como pode ser visto a rota com cache habilitado possui um melhor desempenho apre
   <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/graficoVazao.png"  width="650"> 
 </p>
 
-Como pode ser visto a rota com cache habilitado possui uma grande vazão, porém infelizmente não foi possivel chegar ao limite de vazão pois a aplicação e a ferramenta de teste estavam na mesma máquina. Foi utilizado 500 usuários( Threads), durante 60 segundos e um tempo de inicialização de 5 segundos. 
+Como pode ser visto a rota com cache habilitado possui uma grande vazão, porém infelizmente não foi possivel chegar ao limite de vazão pois a aplicação e a ferramenta de teste estavam na mesma máquina. Foi utilizado 500 usuários( Threads), durante 60 segundos e um tempo de inicialização de 5 segundos.
+
+### Licença
+
+ MIT
 
