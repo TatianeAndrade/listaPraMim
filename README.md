@@ -52,6 +52,13 @@ Para medir o desempenho foi utilizada a ferramenta JMeter para realização de T
 </p>
 
 
-Como pode ser visto a rota com cache habilitado possui um melhor desempenho apresentado um tempo de resposta menor e estável. Entretanto a rota sem o cache habilitado apresentou um aumento no tempo de resposta ao longo da carga de requisição. 
+Como pode ser visto a rota com cache habilitado possui um melhor desempenho apresentado um tempo de resposta menor e estável. Entretanto a rota sem o cache habilitado apresentou um aumento no tempo de resposta ao longo da carga de requisição. Foi utilizado 50 usuários( Threads), durante 60 segundos e um tempo de inicialização de 5 segundos.
 
+#### Vazão
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/graficoVazao.png"  width="650"> 
+</p>
+
+Como pode ser visto a rota com cache habilitado possui uma grande vazão, porém infelizmente não foi possivel chegar ao limite de vazão pois a aplicação e a ferramenta de teste estavam na mesma máquina. Foi utilizado 500 usuários( Threads), durante 60 segundos e um tempo de inicialização de 5 segundos. 
 
