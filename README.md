@@ -33,3 +33,25 @@ A entidade Usuario foi utilizada para conter os atributos de autenticação emai
 <p align="center">
   <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/autenticacao.png"  width="650"> 
 </p>
+
+### Autorização
+
+A aplicação possui dois tipos de usuários Admin e Usuario. Ao receber uma requisição, para determinadas rotas o Backend verifica se o usuario possui privilégios para assim responder a solicitação.
+Para isso foi criado um filtro de autorização registrado em SecurityConfig juntamente com o UserDetailsService. Neste filtro é verificado o token a partir de uma função implementada no JWTUtil que informa se o mesmo é válido. Se o usuário não possua o privílégio a requisição é negada retornando o status 403.
+
+### Desempenho
+
+Para melhorar o desempenho da aplicação foi utilizado o Redis (um banco de dados NoSQL do tipo chave valor armazenado em memória RAM). Ele é utilizado como provedor de cache para otimizar o acesso à dados evitando requisições repetitivas à banco de dados que possuem grandes estruturas, complexas e nem sempre performáticas.
+
+Para medir o desempenho foi utilizada a ferramenta JMeter para realização de Testes de vazão e tempo de resposta. Foram obtidos os seguintes gráficos:
+
+#### Tempo de resposta
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/grafico.png"  width="650"> 
+</p>
+
+
+Como pode ser visto a rota com cache habilitado possui um melhor desempenho apresentado um tempo de resposta menor e estável. Entretanto a rota sem o cache habilitado apresentou um aumento no tempo de resposta ao longo da carga de requisição. 
+
+
