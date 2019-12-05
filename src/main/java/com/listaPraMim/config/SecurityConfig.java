@@ -18,7 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import com.listaPraMim.enums.Perfil;
 import com.listaPraMim.security.JWTAuthenticationFilter;
 import com.listaPraMim.security.JWTAuthorizationFilter;
 import com.listaPraMim.security.JWTUtil;
@@ -31,12 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
-	
+		
 	@Autowired
 	private JWTUtil jwtUtil;
 	
 	@Autowired
     private Environment environment;
+	
+	private Perfil perfil;
 	
 	private static final String h2 = "/h2-console/**";
 
@@ -46,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		if (Arrays.asList(environment.getActiveProfiles()).contains("test")) {
             http.headers().frameOptions().disable();
         }
-		http.cors().and().csrf().disable();
+		http.cors().disable();
 		http.authorizeRequests()
 			.antMatchers(HttpMethod.POST, RestConstants.USUARIO_URI).permitAll()
 			.antMatchers(h2).permitAll()
