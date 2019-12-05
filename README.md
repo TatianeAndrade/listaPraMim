@@ -62,6 +62,24 @@ Como pode ser visto a rota com cache habilitado possui um melhor desempenho apre
 
 Como pode ser visto a rota com cache habilitado possui uma grande vazão, porém infelizmente não foi possivel chegar ao limite de vazão pois a aplicação e a ferramenta de teste estavam na mesma máquina. Foi utilizado 500 usuários( Threads), durante 60 segundos e um tempo de inicialização de 5 segundos.
 
+#### Sistema de recomendação de itens
+
+Para utilização de um sistema de recomendação de itens, será usado o apache kafka uma plataforma opensource de streaming distribuído para gerenciar o processamento de eventos criados a partir dos itens adicionados por usuários. Os eventos são publicados em tópicos
+semelhante a um feed de mensagens, podendo ser consumido por um ou mais consumidores, utilizando a estrutura de partições que possibilita o melhor consumo entre múltiplos consumidores concorrentes através de grupo de consumidores. Como mostra a imagem abaixo:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/kafka.png"  width="650"> 
+</p>
+
+#### Sistema de Autenticação
+
+o Firebase Authentication será usado na autenticação visando maximizar as opções de login, visto que oferece integração com as diversos provedores de identidade federados. Exemplo(Gmail, Facebook, Twitter, Github, etc).Neste sistema de autenticação toda responsabilidade de armazenar os dados do usuário, gerar e verificar token, encriptar senha ficam a cargo do Firebase. 
+No Spring Boot o Firebase trabalha em conjunto com Spring Security, o Spring Security intercepta as requisições ao backend e implementa filtros que extraem o token da requisição e transmite para o SDK do Firebase Authentication onde será verificado pelos serviços de backend. Como mostra a imagem abaixo:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/TatianeAndrade/listaPraMim/master/imagens/firebase.png"  width="650"> 
+</p>
+
 ### Licença
 
  MIT
